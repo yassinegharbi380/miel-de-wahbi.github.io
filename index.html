@@ -501,10 +501,16 @@
             color: var(--primary);
         }
 
+        .submit-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
         .submit-btn {
             width: 100%;
             padding: 1.2rem;
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             color: var(--white);
             border: none;
             border-radius: 50px;
@@ -512,12 +518,38 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
         .submit-btn:hover {
             transform: translateY(-3px);
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+        }
+
+        .whatsapp-btn:hover {
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .facebook-btn {
+            background: linear-gradient(135deg, #1877F2 0%, #0C63D4 100%);
+        }
+
+        .facebook-btn:hover {
+            box-shadow: 0 6px 20px rgba(24, 119, 242, 0.4);
+        }
+
+        .phone-btn {
+            background: linear-gradient(135deg, #f4a623 0%, #e88b0c 100%);
+        }
+
+        .phone-btn:hover {
+            box-shadow: 0 6px 20px rgba(244, 166, 35, 0.4);
         }
 
         /* Footer */
@@ -776,9 +808,17 @@
                 <textarea id="customerMessage" rows="3" placeholder="Des instructions particulières pour votre commande ?"></textarea>
             </div>
 
-            <button class="submit-btn" onclick="sendWhatsAppOrder()">
-                📱 Envoyer via WhatsApp
-            </button>
+            <div class="submit-buttons">
+                <button class="submit-btn whatsapp-btn" onclick="sendWhatsAppOrder()">
+                    📱 Envoyer via WhatsApp
+                </button>
+                <button class="submit-btn facebook-btn" onclick="sendFacebookOrder()">
+                    💬 Envoyer via Facebook Messenger
+                </button>
+                <button class="submit-btn phone-btn" onclick="callPhone()">
+                    📞 Appeler Maintenant
+                </button>
+            </div>
         </div>
     </div>
 
@@ -879,6 +919,48 @@
         }
 
         function sendWhatsAppOrder() {
+            const orderData = getOrderData();
+            if (!orderData) return;
+
+            let whatsappMessage = formatOrderMessage(orderData);
+            const whatsappURL = `https://wa.me/21697244049?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappURL, '_blank');
+            
+            showSuccessMessage('WhatsApp');
+        }
+
+        function sendFacebookOrder() {
+            const orderData = getOrderData();
+            if (!orderData) return;
+
+            let facebookMessage = formatOrderMessage(orderData);
+            const facebookURL = `https://m.me/abdel.gharbi.7?text=${encodeURIComponent(facebookMessage)}`;
+            window.open(facebookURL, '_blank');
+            
+            showSuccessMessage('Facebook Messenger');
+        }
+
+        function callPhone() {
+            const orderData = getOrderData();
+            if (!orderData) return;
+
+            const confirmCall = confirm(
+                `Vous allez appeler Miel de Wahbi au +216 97 244 049\n\n` +
+                `Votre commande :\n` +
+                `• ${orderData.product}\n` +
+                `• ${orderData.size}\n` +
+                `• Quantité: ${orderData.quantity}\n` +
+                `• Total: ${orderData.total} DT\n\n` +
+                `Préparez ces informations pour l'appel !`
+            );
+
+            if (confirmCall) {
+                window.location.href = 'tel:+21697244049';
+                showSuccessMessage('Appel téléphonique');
+            }
+        }
+
+        function getOrderData() {
             const name = document.getElementById('customerName').value;
             const phone = document.getElementById('customerPhone').value;
             const city = document.getElementById('customerCity').value;
@@ -887,34 +969,45 @@
 
             if (!name || !phone || !city || !address) {
                 alert('Veuillez remplir tous les champs obligatoires (*)');
-                return;
+                return null;
             }
 
-            let whatsappMessage = `🍯 *NOUVELLE COMMANDE - MIEL DE WAHBI*
+            return {
+                name, phone, city, address, message,
+                product: currentOrderData.product,
+                size: currentOrderData.size,
+                quantity: currentOrderData.quantity,
+                total: currentOrderData.total
+            };
+        }
 
-📦 *COMMANDE:*
-• Produit: ${currentOrderData.product}
-• Taille: ${currentOrderData.size}
-• Quantité: ${currentOrderData.quantity}
-💰 *TOTAL: ${currentOrderData.total} DT*
+        function formatOrderMessage(data) {
+            let message = `🍯 NOUVELLE COMMANDE - MIEL DE WAHBI
 
-👤 *CLIENT:*
-• Nom: ${name}
-• 📞 Téléphone: ${phone}
-• 🏙️ Ville: ${city}
-• 📍 Adresse: ${address}`;
+📦 COMMANDE:
+• Produit: ${data.product}
+• Taille: ${data.size}
+• Quantité: ${data.quantity}
+💰 TOTAL: ${data.total} DT
 
-            if (message) {
-                whatsappMessage += `
+👤 CLIENT:
+• Nom: ${data.name}
+• 📞 Téléphone: ${data.phone}
+• 🏙️ Ville: ${data.city}
+• 📍 Adresse: ${data.address}`;
 
-💬 *Message:* ${message}`;
+            if (data.message) {
+                message += `
+
+💬 Message: ${data.message}`;
             }
 
-            const whatsappURL = `https://wa.me/21629115645?text=${encodeURIComponent(whatsappMessage)}`;
-            window.open(whatsappURL, '_blank');
-            
+            return message;
+        }
+
+        function showSuccessMessage(platform) {
             closeModal();
-            alert('Merci ! Votre commande va être envoyée via WhatsApp. Nous vous contacterons rapidement ! 🍯');
+            alert(`Merci ! Votre commande va être envoyée via ${platform}. Nous vous contacterons rapidement ! 🍯`);
         }
 
         window.onclick = function(event) {
