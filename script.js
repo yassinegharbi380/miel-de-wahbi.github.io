@@ -762,14 +762,216 @@ function sendFacebookOrder() {
 
     const message = formatOrderMessage(orderData);
     
+    // Essayer de copier le message
     navigator.clipboard.writeText(message).then(() => {
-        alert('✅ Message copié ! Collez-le dans Facebook Messenger.');
-        window.open('https://m.me/abdel.gharbi.7', '_blank');
-        showSuccessMessage('Facebook Messenger');
+        // Afficher un modal personnalisé au lieu d'une simple alerte
+        showFacebookModal(message);
     }).catch(() => {
-        alert('Veuillez copier ce message et l\'envoyer via Messenger:\n\n' + message);
-        window.open('https://m.me/abdel.gharbi.7', '_blank');
+        // Fallback si le clipboard ne marche pas
+        showFacebookModal(message);
     });
+}
+
+// Nouvelle fonction pour afficher un modal Facebook amélioré
+function showFacebookModal(message) {
+    // Créer le modal
+    const modalHTML = `
+        <div class="facebook-modal" id="facebookModal" style="
+            display: flex;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 99999;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-out;
+        ">
+            <div style="
+                background: white;
+                border-radius: 24px;
+                max-width: 600px;
+                width: 90%;
+                max-height: 80vh;
+                overflow: hidden;
+                animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            ">
+                <!-- Header -->
+                <div style="
+                    background: linear-gradient(135deg, #1877F2, #0C63D4);
+                    color: white;
+                    padding: 2rem;
+                    text-align: center;
+                ">
+                    <svg style="width: 48px; height: 48px; margin-bottom: 1rem;" viewBox="0 0 24 24" fill="white">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    <h2 style="font-size: 1.75rem; font-weight: 800; margin: 0;">
+                        Message copié ! ✅
+                    </h2>
+                    <p style="margin-top: 0.5rem; opacity: 0.9;">
+                        Votre commande est prête à être envoyée
+                    </p>
+                </div>
+
+                <!-- Content -->
+                <div style="padding: 2rem;">
+                    <div style="
+                        background: #f0f2f5;
+                        padding: 1.5rem;
+                        border-radius: 12px;
+                        margin-bottom: 1.5rem;
+                        border-left: 4px solid #1877F2;
+                    ">
+                        <p style="
+                            font-size: 1.125rem;
+                            font-weight: 600;
+                            color: #1877F2;
+                            margin-bottom: 0.75rem;
+                        ">
+                            📋 Instructions :
+                        </p>
+                        <ol style="
+                            margin: 0;
+                            padding-left: 1.5rem;
+                            color: #333;
+                            line-height: 1.8;
+                        ">
+                            <li>Le message a été <strong>copié automatiquement</strong></li>
+                            <li>Cliquez sur le bouton bleu ci-dessous</li>
+                            <li><strong>Collez le message</strong> (Ctrl+V ou maintenir et coller)</li>
+                            <li>Appuyez sur Envoyer dans Messenger</li>
+                        </ol>
+                    </div>
+
+                    <!-- Message Preview -->
+                    <details style="margin-bottom: 1.5rem;">
+                        <summary style="
+                            cursor: pointer;
+                            font-weight: 600;
+                            color: #1877F2;
+                            padding: 0.75rem;
+                            background: #f0f2f5;
+                            border-radius: 8px;
+                        ">
+                            📄 Voir le message à envoyer
+                        </summary>
+                        <div style="
+                            margin-top: 1rem;
+                            padding: 1rem;
+                            background: #f8f9fa;
+                            border-radius: 8px;
+                            max-height: 200px;
+                            overflow-y: auto;
+                            font-family: monospace;
+                            font-size: 0.875rem;
+                            white-space: pre-wrap;
+                            border: 1px solid #e0e0e0;
+                        ">${message}</div>
+                    </details>
+
+                    <!-- Actions -->
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <button onclick="openMessengerAndClose()" style="
+                            padding: 1.25rem;
+                            background: linear-gradient(135deg, #1877F2, #0C63D4);
+                            color: white;
+                            border: none;
+                            border-radius: 12px;
+                            font-size: 1.125rem;
+                            font-weight: 700;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 0.75rem;
+                            transition: all 0.3s ease;
+                        " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 24px rgba(24,119,242,0.4)'" onmouseout="this.style.transform=''; this.style.boxShadow=''">
+                            <svg style="width: 24px; height: 24px;" viewBox="0 0 24 24" fill="white">
+                                <path d="M12 0C5.373 0 0 4.975 0 11.111c0 3.497 1.745 6.616 4.472 8.652V24l4.086-2.242c1.09.301 2.246.464 3.442.464 6.627 0 12-4.974 12-11.111C24 4.975 18.627 0 12 0zm1.191 14.963l-3.055-3.26-5.963 3.26L10.732 8l3.131 3.259L19.752 8l-6.561 6.963z"/>
+                            </svg>
+                            Ouvrir Facebook Messenger
+                        </button>
+
+                        <button onclick="copyAgainFacebook('${message.replace(/'/g, "\\'")}', this)" style="
+                            padding: 1rem;
+                            background: #f0f2f5;
+                            color: #333;
+                            border: 2px solid #e0e0e0;
+                            border-radius: 12px;
+                            font-size: 1rem;
+                            font-weight: 600;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                        " onmouseover="this.style.background='#e4e6e9'" onmouseout="this.style.background='#f0f2f5'">
+                            📋 Copier à nouveau
+                        </button>
+
+                        <button onclick="closeFacebookModal()" style="
+                            padding: 0.75rem;
+                            background: transparent;
+                            color: #666;
+                            border: none;
+                            font-size: 0.9375rem;
+                            cursor: pointer;
+                        ">
+                            Annuler
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Ajouter au body
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    document.body.style.overflow = 'hidden';
+}
+
+// Fonction pour ouvrir Messenger et fermer le modal
+function openMessengerAndClose() {
+    window.open('https://m.me/abdel.gharbi.7', '_blank');
+    closeFacebookModal();
+    
+    // Montrer message de succès après un délai
+    setTimeout(() => {
+        showSuccessMessage('Facebook Messenger');
+    }, 500);
+}
+
+// Fonction pour copier à nouveau
+function copyAgainFacebook(message, button) {
+    // Décoder le message
+    const decodedMessage = message.replace(/\\'/g, "'");
+    
+    navigator.clipboard.writeText(decodedMessage).then(() => {
+        // Changer le texte du bouton temporairement
+        const originalText = button.innerHTML;
+        button.innerHTML = '✅ Copié !';
+        button.style.background = '#10b981';
+        button.style.color = 'white';
+        button.style.borderColor = '#10b981';
+        
+        setTimeout(() => {
+            button.innerHTML = originalText;
+            button.style.background = '#f0f2f5';
+            button.style.color = '#333';
+            button.style.borderColor = '#e0e0e0';
+        }, 2000);
+    }).catch(() => {
+        alert('Erreur de copie. Veuillez copier manuellement.');
+    });
+}
+
+// Fonction pour fermer le modal Facebook
+function closeFacebookModal() {
+    const modal = document.getElementById('facebookModal');
+    if (modal) {
+        modal.style.animation = 'fadeOut 0.3s ease-out';
+        setTimeout(() => {
+            modal.remove();
+            document.body.style.overflow = '';
+        }, 300);
+    }
 }
 
 function callPhone() {
