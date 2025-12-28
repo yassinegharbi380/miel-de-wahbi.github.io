@@ -27,7 +27,6 @@
             overflow-x: hidden;
         }
 
-        /* Honeycomb Background Animation */
         .honeycomb-bg {
             position: fixed;
             top: 0;
@@ -59,7 +58,6 @@
             50% { transform: translateY(-20px) rotate(5deg); }
         }
 
-        /* Header */
         header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             padding: 1rem 0;
@@ -89,12 +87,6 @@
             font-weight: bold;
             color: var(--white);
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
         }
 
         .cart-icon {
@@ -106,6 +98,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
         }
 
         .cart-icon:hover {
@@ -113,33 +106,43 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
 
-        /* Hero Section */
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #dc2626;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .cart-badge.show {
+            display: flex;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
         .hero {
             position: relative;
             background: linear-gradient(135deg, rgba(244,166,35,0.1) 0%, rgba(232,139,12,0.1) 100%);
             padding: 4rem 2rem;
             text-align: center;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero h1 {
             font-size: 3.5rem;
             color: var(--secondary);
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         .hero h1 span {
@@ -164,15 +167,8 @@
             font-weight: bold;
             font-size: 1.2rem;
             box-shadow: 0 4px 15px var(--shadow);
-            animation: bounce 2s ease-in-out infinite;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Products Section */
         .products-section {
             max-width: 1400px;
             margin: 4rem auto;
@@ -185,12 +181,6 @@
             color: var(--secondary);
             margin-bottom: 3rem;
             position: relative;
-            animation: fadeIn 1s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .section-title::after {
@@ -215,36 +205,21 @@
             overflow: hidden;
             box-shadow: 0 10px 30px var(--shadow);
             transition: all 0.4s ease;
-            animation: fadeInUp 0.6s ease-out;
-            animation-fill-mode: both;
         }
 
-        .product-card:nth-child(1) { animation-delay: 0.1s; }
-        .product-card:nth-child(2) { animation-delay: 0.2s; }
-        .product-card:nth-child(3) { animation-delay: 0.3s; }
-        .product-card:nth-child(4) { animation-delay: 0.4s; }
-
         .product-card:hover {
-            transform: translateY(-15px) scale(1.02);
+            transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(244, 166, 35, 0.4);
         }
 
         .product-image {
             position: relative;
             height: 300px;
-            overflow: hidden;
-            background: #f5f5f5;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .product-card:hover .product-image img {
-            transform: scale(1.1);
+            background: linear-gradient(135deg, #ffd89b 0%, #f4a623 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
         }
 
         .product-badge {
@@ -258,7 +233,6 @@
             font-weight: bold;
             font-size: 0.9rem;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            animation: pulse 2s ease-in-out infinite;
         }
 
         .product-info {
@@ -275,7 +249,6 @@
         .product-description {
             color: #666;
             margin-bottom: 1rem;
-            font-size: 1rem;
         }
 
         .product-price {
@@ -309,7 +282,6 @@
             transform: scale(1.05);
         }
 
-        /* Quantity Selector */
         .quantity-selector {
             display: flex;
             align-items: center;
@@ -319,17 +291,6 @@
             background: #f8f8f8;
             padding: 1rem;
             border-radius: 15px;
-        }
-
-        .quantity-label {
-            font-weight: bold;
-            color: var(--secondary);
-        }
-
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
         }
 
         .quantity-btn {
@@ -343,34 +304,21 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .quantity-btn:hover {
             background: var(--primary);
             color: var(--white);
-            transform: scale(1.1);
         }
 
         .quantity-value {
             font-size: 1.5rem;
             font-weight: bold;
-            color: var(--secondary);
             min-width: 40px;
             text-align: center;
         }
 
-        .total-price {
-            text-align: center;
-            font-size: 1.3rem;
-            color: var(--primary);
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        .order-btn {
+        .add-to-cart-btn {
             width: 100%;
             padding: 1.2rem;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
@@ -384,12 +332,279 @@
             box-shadow: 0 4px 15px var(--shadow);
         }
 
-        .order-btn:hover {
+        .add-to-cart-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(244, 166, 35, 0.5);
         }
 
-        /* Contact Form Modal */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: -400px;
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 10000;
+            transition: right 0.5s ease;
+            max-width: 350px;
+            border-left: 5px solid #10b981;
+        }
+
+        .toast.show {
+            right: 20px;
+        }
+
+        .toast-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .toast-icon {
+            font-size: 2rem;
+        }
+
+        .toast-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .toast-message {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .toast-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .toast-btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .toast-btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .toast-btn-secondary {
+            background: #f0f0f0;
+            color: var(--secondary);
+        }
+
+        .toast-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 5000;
+        }
+
+        .cart-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            font-size: 2rem;
+        }
+
+        .close-cart {
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-cart:hover {
+            transform: rotate(90deg);
+        }
+
+        .cart-items {
+            padding: 2rem;
+            max-height: 50vh;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8f8f8;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ffd89b 0%, #f4a623 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .cart-item-info h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-details {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cart-qty-btn {
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .cart-qty-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .cart-item-actions {
+            text-align: right;
+        }
+
+        .cart-item-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .remove-item {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .remove-item:hover {
+            background: #b91c1c;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        .empty-cart-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cart-summary {
+            padding: 2rem;
+            border-top: 2px solid #f0f0f0;
+            background: #fafafa;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--primary);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(244, 166, 35, 0.5);
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -398,115 +613,24 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.7);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease-out;
+            z-index: 6000;
         }
 
         .modal.active {
             display: flex;
-        }
-
-        /* Message Preview Modal */
-        .message-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 3000;
             align-items: center;
             justify-content: center;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .message-modal.active {
-            display: flex;
-        }
-
-        .message-preview {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 20px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-            animation: slideUp 0.4s ease-out;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        .message-preview h2 {
-            color: var(--secondary);
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .copied-notification {
-            background: #10b981;
-            color: white;
-            padding: 0.8rem;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 1rem;
-            font-weight: bold;
-            animation: pulse 0.5s ease-in-out;
-        }
-
-        .message-text {
-            background: #f8f8f8;
-            padding: 1.5rem;
-            border-radius: 10px;
-            white-space: pre-wrap;
-            font-family: monospace;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-            border: 2px solid var(--primary);
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .message-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .copy-again-btn {
-            background: var(--primary);
-            color: white;
-            padding: 1rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .copy-again-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px var(--shadow);
         }
 
         .modal-content {
-            background: var(--white);
+            background: white;
             padding: 3rem;
             border-radius: 20px;
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            animation: slideUp 0.4s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         .close-modal {
@@ -530,6 +654,40 @@
             text-align: center;
         }
 
+        .order-summary {
+            background: #f8f8f8;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .order-summary h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--primary);
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -537,7 +695,6 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: var(--secondary);
             font-weight: bold;
         }
 
@@ -560,25 +717,6 @@
             box-shadow: 0 0 10px var(--shadow);
         }
 
-        .order-summary {
-            background: #f8f8f8;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-        }
-
-        .order-summary h3 {
-            margin-bottom: 1rem;
-            color: var(--secondary);
-        }
-
-        .order-summary-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-        }
-
         .delivery-info {
             background: #e8f5e9;
             padding: 1rem;
@@ -592,60 +730,22 @@
             border-left-color: var(--primary);
         }
 
-        .delivery-info p {
-            margin: 0.3rem 0;
-            font-size: 0.9rem;
-        }
-
-        .order-summary-subtotal {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid #ddd;
-            font-size: 1.1rem;
-        }
-
-        .order-summary-delivery {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 0.5rem;
-            font-size: 1.1rem;
-            color: var(--primary);
-        }
-
-        .order-summary-total {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 2px solid var(--primary);
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-
         .submit-buttons {
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            margin-top: 1rem;
         }
 
         .submit-btn {
             width: 100%;
             padding: 1.2rem;
-            color: var(--white);
+            color: white;
             border: none;
             border-radius: 50px;
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
         }
 
         .submit-btn:hover {
@@ -656,27 +756,14 @@
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
         }
 
-        .whatsapp-btn:hover {
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-        }
-
         .facebook-btn {
             background: linear-gradient(135deg, #1877F2 0%, #0C63D4 100%);
         }
 
-        .facebook-btn:hover {
-            box-shadow: 0 6px 20px rgba(24, 119, 242, 0.4);
-        }
-
         .phone-btn {
-            background: linear-gradient(135deg, #f4a623 0%, #e88b0c 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
         }
 
-        .phone-btn:hover {
-            box-shadow: 0 6px 20px rgba(244, 166, 35, 0.4);
-        }
-
-        /* Footer */
         footer {
             background: var(--secondary);
             color: var(--white);
@@ -685,17 +772,14 @@
             text-align: center;
         }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
         .footer-info {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
             gap: 2rem;
             margin-bottom: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
         }
 
         .footer-section h3 {
@@ -703,18 +787,24 @@
             margin-bottom: 1rem;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
-            .hero p { font-size: 1.2rem; }
             .products-grid { grid-template-columns: 1fr; }
             nav { flex-direction: column; gap: 1rem; }
-            .modal-content { padding: 2rem 1.5rem; }
+            .cart-item {
+                grid-template-columns: 60px 1fr;
+            }
+            .cart-item-actions {
+                grid-column: 1 / -1;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 0.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Honeycomb Background -->
     <div class="honeycomb-bg">
         <div class="hexagon"></div>
         <div class="hexagon"></div>
@@ -723,34 +813,31 @@
         <div class="hexagon"></div>
     </div>
 
-    <!-- Header -->
     <header>
         <nav>
             <div class="logo">🍯 Miel de Wahbi</div>
-            <div class="cart-icon" onclick="scrollToProducts()">🛒 Commander</div>
+            <div class="cart-icon" onclick="openCart()">
+                🛒 Panier
+                <span class="cart-badge" id="cartBadge">0</span>
+            </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>Le Vrai <span>Miel Tunisien</span></h1>
             <p>100% Pur & Naturel de Sidi Bouzid</p>
-            <div class="badge">
-                ✓ Certifié 100% Naturel
-            </div>
+            <div class="badge">✓ Certifié 100% Naturel</div>
         </div>
     </section>
 
-    <!-- Products Section -->
     <section class="products-section" id="products">
         <h2 class="section-title">Nos Miels Naturels</h2>
         
         <div class="products-grid">
-            <!-- Product 1: Eucalyptus -->
-            <div class="product-card">
+            <div class="product-card" data-product="Miel d'Eucalyptus">
                 <div class="product-image">
-                    <img src="images/eucalyptus.jpg" alt="Miel d'Eucalyptus">
+                    🍯
                     <span class="product-badge">En Stock</span>
                 </div>
                 <div class="product-info">
@@ -759,31 +846,25 @@
                     <div class="product-price">65 DT / kg</div>
                     
                     <div class="size-selector">
-                        <button class="size-btn active" onclick="selectSize(this, '500g', 32.5)">500g</button>
-                        <button class="size-btn" onclick="selectSize(this, '1kg', 65)">1kg</button>
+                        <button class="size-btn active" data-size="500g" data-price="32.5">500g</button>
+                        <button class="size-btn" data-size="1kg" data-price="65">1kg</button>
                     </div>
 
                     <div class="quantity-selector">
-                        <span class="quantity-label">Quantité:</span>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn" onclick="decreaseQuantity(this)">−</button>
-                            <span class="quantity-value">1</span>
-                            <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
-                        </div>
+                        <button class="quantity-btn" onclick="decreaseQty(this)">−</button>
+                        <span class="quantity-value">1</span>
+                        <button class="quantity-btn" onclick="increaseQty(this)">+</button>
                     </div>
 
-                    <div class="total-price">Total: <span class="total-amount">32.5</span> DT</div>
-
-                    <button class="order-btn" onclick="openOrderModal(this, 'Miel d\'Eucalyptus')">
-                        Commander Maintenant
+                    <button class="add-to-cart-btn" onclick="addToCart(this)">
+                        🛒 Ajouter au panier
                     </button>
                 </div>
             </div>
 
-            <!-- Product 2: Thym -->
-            <div class="product-card">
+            <div class="product-card" data-product="Miel de Thym">
                 <div class="product-image">
-                    <img src="images/thym.jpg" alt="Miel de Thym">
+                    🍯
                     <span class="product-badge">En Stock</span>
                 </div>
                 <div class="product-info">
@@ -792,31 +873,25 @@
                     <div class="product-price">65 DT / kg</div>
                     
                     <div class="size-selector">
-                        <button class="size-btn active" onclick="selectSize(this, '500g', 32.5)">500g</button>
-                        <button class="size-btn" onclick="selectSize(this, '1kg', 65)">1kg</button>
+                        <button class="size-btn active" data-size="500g" data-price="32.5">500g</button>
+                        <button class="size-btn" data-size="1kg" data-price="65">1kg</button>
                     </div>
 
                     <div class="quantity-selector">
-                        <span class="quantity-label">Quantité:</span>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn" onclick="decreaseQuantity(this)">−</button>
-                            <span class="quantity-value">1</span>
-                            <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
-                        </div>
+                        <button class="quantity-btn" onclick="decreaseQty(this)">−</button>
+                        <span class="quantity-value">1</span>
+                        <button class="quantity-btn" onclick="increaseQty(this)">+</button>
                     </div>
 
-                    <div class="total-price">Total: <span class="total-amount">32.5</span> DT</div>
-
-                    <button class="order-btn" onclick="openOrderModal(this, 'Miel de Thym')">
-                        Commander Maintenant
+                    <button class="add-to-cart-btn" onclick="addToCart(this)">
+                        🛒 Ajouter au panier
                     </button>
                 </div>
             </div>
 
-            <!-- Product 3: Fleurs -->
-            <div class="product-card">
+            <div class="product-card" data-product="Miel de Fleurs">
                 <div class="product-image">
-                    <img src="images/fleurs.jpg" alt="Miel de Fleurs">
+                    🍯
                     <span class="product-badge">En Stock</span>
                 </div>
                 <div class="product-info">
@@ -825,31 +900,25 @@
                     <div class="product-price">65 DT / kg</div>
                     
                     <div class="size-selector">
-                        <button class="size-btn active" onclick="selectSize(this, '500g', 32.5)">500g</button>
-                        <button class="size-btn" onclick="selectSize(this, '1kg', 65)">1kg</button>
+                        <button class="size-btn active" data-size="500g" data-price="32.5">500g</button>
+                        <button class="size-btn" data-size="1kg" data-price="65">1kg</button>
                     </div>
 
                     <div class="quantity-selector">
-                        <span class="quantity-label">Quantité:</span>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn" onclick="decreaseQuantity(this)">−</button>
-                            <span class="quantity-value">1</span>
-                            <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
-                        </div>
+                        <button class="quantity-btn" onclick="decreaseQty(this)">−</button>
+                        <span class="quantity-value">1</span>
+                        <button class="quantity-btn" onclick="increaseQty(this)">+</button>
                     </div>
 
-                    <div class="total-price">Total: <span class="total-amount">32.5</span> DT</div>
-
-                    <button class="order-btn" onclick="openOrderModal(this, 'Miel de Fleurs')">
-                        Commander Maintenant
+                    <button class="add-to-cart-btn" onclick="addToCart(this)">
+                        🛒 Ajouter au panier
                     </button>
                 </div>
             </div>
 
-            <!-- Product 4: Agrumes -->
-            <div class="product-card">
+            <div class="product-card" data-product="Miel d'Agrumes">
                 <div class="product-image">
-                    <img src="images/agrumes.jpg" alt="Miel d'Agrumes">
+                    🍯
                     <span class="product-badge">En Stock</span>
                 </div>
                 <div class="product-info">
@@ -858,68 +927,75 @@
                     <div class="product-price">65 DT / kg</div>
                     
                     <div class="size-selector">
-                        <button class="size-btn active" onclick="selectSize(this, '500g', 32.5)">500g</button>
-                        <button class="size-btn" onclick="selectSize(this, '1kg', 65)">1kg</button>
+                        <button class="size-btn active" data-size="500g" data-price="32.5">500g</button>
+                        <button class="size-btn" data-size="1kg" data-price="65">1kg</button>
                     </div>
 
                     <div class="quantity-selector">
-                        <span class="quantity-label">Quantité:</span>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn" onclick="decreaseQuantity(this)">−</button>
-                            <span class="quantity-value">1</span>
-                            <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
-                        </div>
+                        <button class="quantity-btn" onclick="decreaseQty(this)">−</button>
+                        <span class="quantity-value">1</span>
+                        <button class="quantity-btn" onclick="increaseQty(this)">+</button>
                     </div>
 
-                    <div class="total-price">Total: <span class="total-amount">32.5</span> DT</div>
-
-                    <button class="order-btn" onclick="openOrderModal(this, 'Miel d\'Agrumes')">
-                        Commander Maintenant
+                    <button class="add-to-cart-btn" onclick="addToCart(this)">
+                        🛒 Ajouter au panier
                     </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Order Modal -->
-    <div class="modal" id="orderModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2>🍯 Finaliser la Commande</h2>
-            
-            <div class="order-summary">
-                <h3 style="margin-bottom: 1rem; color: var(--secondary);">Récapitulatif</h3>
-                <div class="order-summary-item">
-                    <span>Produit:</span>
-                    <span id="summaryProduct"></span>
-                </div>
-                <div class="order-summary-item">
-                    <span>Taille:</span>
-                    <span id="summarySize"></span>
-                </div>
-                <div class="order-summary-item">
-                    <span>Quantité:</span>
-                    <span id="summaryQuantity"></span>
-                </div>
-                
-                <div class="order-summary-subtotal">
-                    <span>Sous-total:</span>
-                    <span id="summarySubtotal"></span>
-                </div>
-                <div class="order-summary-delivery">
-                    <span>Livraison:</span>
-                    <span id="summaryDelivery">Calculé selon ville</span>
-                </div>
-                <div class="order-summary-total">
-                    <span>TOTAL:</span>
-                    <span id="summaryTotal"></span>
-                </div>
+    <div class="toast" id="toast">
+        <div class="toast-header">
+            <span class="toast-icon">✅</span>
+            <span class="toast-title">Produit ajouté au panier !</span>
+        </div>
+        <p class="toast-message" id="toastMessage"></p>
+        <div class="toast-buttons">
+            <button class="toast-btn toast-btn-secondary" onclick="closeToast()">Continuer mes achats</button>
+            <button class="toast-btn toast-btn-primary" onclick="closeToast(); openCart()">Voir mon panier</button>
+        </div>
+    </div>
 
-                <div class="delivery-info" id="deliveryInfo" style="display: none;">
-                    <p><strong>📍 Livraison</strong></p>
-                    <p id="deliveryMessage"></p>
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>🛒 Mon Panier</h2>
+                <span class="close-cart" onclick="closeCart()">&times;</span>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">
+                    <div class="empty-cart-icon">🛒</div>
+                    <h3>Votre panier est vide</h3>
+                    <p>Ajoutez des produits pour commencer !</p>
                 </div>
             </div>
+            <div class="cart-summary" id="cartSummary" style="display: none;">
+                <div class="summary-row">
+                    <span>Sous-total:</span>
+                    <span id="subtotalAmount">0 DT</span>
+                </div>
+                <div class="summary-row">
+                    <span>Livraison:</span>
+                    <span id="deliveryAmount">À calculer</span>
+                </div>
+                <div class="summary-total">
+                    <span>TOTAL:</span>
+                    <span id="totalAmount">0 DT</span>
+                </div>
+                <button class="checkout-btn" onclick="proceedToCheckout()">
+                    Passer la commande
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeCheckoutModal()">&times;</span>
+            <h2>🍯 Finaliser la Commande</h2>
+            
+            <div class="order-summary" id="orderSummaryCheckout"></div>
 
             <div class="form-group">
                 <label>Votre Nom *</label>
@@ -987,33 +1063,6 @@
         </div>
     </div>
 
-    <!-- Message Preview Modal for Facebook -->
-    <div class="message-modal" id="messageModal">
-        <div class="message-preview">
-            <span class="close-modal" onclick="closeMessageModal()">&times;</span>
-            <h2>💬 Message à envoyer</h2>
-            
-            <div class="copied-notification" id="copiedNotification">
-                ✅ Message copié automatiquement !
-            </div>
-
-            <div class="message-text" id="messageText"></div>
-
-            <div class="message-actions">
-                <button class="copy-again-btn" onclick="copyMessageAgain()">
-                    📋 Copier à nouveau
-                </button>
-                <button class="submit-btn facebook-btn" onclick="openMessenger()">
-                    💬 Ouvrir Facebook Messenger
-                </button>
-                <button class="copy-again-btn" style="background: #666;" onclick="closeMessageModal()">
-                    Fermer
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-info">
@@ -1038,90 +1087,246 @@
     </footer>
 
     <script>
-        let currentOrderData = {};
-        let currentMessage = '';
+        let cart = [];
         let deliveryFee = 0;
 
-        function scrollToProducts() {
-            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-        }
+        window.addEventListener('DOMContentLoaded', () => {
+            loadCart();
+            updateCartBadge();
+        });
 
-        function selectSize(btn, size, price) {
-            const card = btn.closest('.product-card');
-            card.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            updateTotal(card, price);
-        }
-
-        function increaseQuantity(btn) {
-            const card = btn.closest('.product-card');
-            const valueSpan = card.querySelector('.quantity-value');
-            let quantity = parseInt(valueSpan.textContent);
-            quantity++;
-            valueSpan.textContent = quantity;
-            
-            const activeSize = card.querySelector('.size-btn.active');
-            const unitPrice = activeSize.textContent === '500g' ? 32.5 : 65;
-            updateTotal(card, unitPrice);
-        }
-
-        function decreaseQuantity(btn) {
-            const card = btn.closest('.product-card');
-            const valueSpan = card.querySelector('.quantity-value');
-            let quantity = parseInt(valueSpan.textContent);
-            if (quantity > 1) {
-                quantity--;
-                valueSpan.textContent = quantity;
-                
-                const activeSize = card.querySelector('.size-btn.active');
-                const unitPrice = activeSize.textContent === '500g' ? 32.5 : 65;
-                updateTotal(card, unitPrice);
+        function saveCart() {
+            const cartData = JSON.stringify(cart);
+            try {
+                localStorage.setItem('honeyCart', cartData);
+            } catch (e) {
+                console.log('Storage not available');
             }
         }
 
-        function updateTotal(card, unitPrice) {
-            const quantity = parseInt(card.querySelector('.quantity-value').textContent);
-            const total = (unitPrice * quantity).toFixed(2);
-            card.querySelector('.total-amount').textContent = total;
+        function loadCart() {
+            try {
+                const savedCart = localStorage.getItem('honeyCart');
+                if (savedCart) {
+                    cart = JSON.parse(savedCart);
+                }
+            } catch (e) {
+                cart = [];
+            }
         }
 
-        function openOrderModal(btn, productName) {
+        document.querySelectorAll('.size-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const card = this.closest('.product-card');
+                card.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        function decreaseQty(btn) {
+            const valueSpan = btn.nextElementSibling;
+            let qty = parseInt(valueSpan.textContent);
+            if (qty > 1) {
+                valueSpan.textContent = qty - 1;
+            }
+        }
+
+        function increaseQty(btn) {
+            const valueSpan = btn.previousElementSibling;
+            let qty = parseInt(valueSpan.textContent);
+            valueSpan.textContent = qty + 1;
+        }
+
+        function addToCart(btn) {
             const card = btn.closest('.product-card');
-            const size = card.querySelector('.size-btn.active').textContent;
-            const quantity = card.querySelector('.quantity-value').textContent;
-            const total = card.querySelector('.total-amount').textContent;
+            const productName = card.dataset.product;
+            const activeSize = card.querySelector('.size-btn.active');
+            const size = activeSize.dataset.size;
+            const price = parseFloat(activeSize.dataset.price);
+            const quantity = parseInt(card.querySelector('.quantity-value').textContent);
 
-            currentOrderData = {
-                product: productName,
-                size: size,
-                quantity: quantity,
-                subtotal: parseFloat(total)
-            };
+            const existingIndex = cart.findIndex(item => 
+                item.product === productName && item.size === size
+            );
 
-            document.getElementById('summaryProduct').textContent = productName;
-            document.getElementById('summarySize').textContent = size;
-            document.getElementById('summaryQuantity').textContent = quantity;
-            document.getElementById('summarySubtotal').textContent = total + ' DT';
+            if (existingIndex !== -1) {
+                cart[existingIndex].quantity += quantity;
+            } else {
+                cart.push({
+                    product: productName,
+                    size: size,
+                    price: price,
+                    quantity: quantity
+                });
+            }
+
+            saveCart();
+            updateCartBadge();
+            showToast(productName, size, quantity);
+            card.querySelector('.quantity-value').textContent = '1';
+        }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cartBadge');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             
-            // Reset delivery
-            deliveryFee = 0;
-            document.getElementById('customerCity').value = '';
-            document.getElementById('summaryDelivery').textContent = 'Calculé selon ville';
-            document.getElementById('summaryTotal').textContent = total + ' DT';
-            document.getElementById('deliveryInfo').style.display = 'none';
+            if (totalItems > 0) {
+                badge.textContent = totalItems;
+                badge.classList.add('show');
+            } else {
+                badge.classList.remove('show');
+            }
+        }
 
-            document.getElementById('orderModal').classList.add('active');
+        function showToast(product, size, quantity) {
+            const toast = document.getElementById('toast');
+            const message = document.getElementById('toastMessage');
+            message.textContent = `${product} (${size}) × ${quantity}`;
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                if (toast.classList.contains('show')) {
+                    closeToast();
+                }
+            }, 5000);
+        }
+
+        function closeToast() {
+            document.getElementById('toast').classList.remove('show');
+        }
+
+        function openCart() {
+            renderCart();
+            document.getElementById('cartModal').classList.add('active');
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').classList.remove('active');
+        }
+
+        function renderCart() {
+            const cartItemsDiv = document.getElementById('cartItems');
+            const cartSummary = document.getElementById('cartSummary');
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">🛒</div>
+                        <h3>Votre panier est vide</h3>
+                        <p>Ajoutez des produits pour commencer !</p>
+                    </div>
+                `;
+                cartSummary.style.display = 'none';
+                return;
+            }
+
+            let html = '';
+            cart.forEach((item, index) => {
+                const total = (item.price * item.quantity).toFixed(2);
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-image">🍯</div>
+                        <div class="cart-item-info">
+                            <h4>${item.product}</h4>
+                            <div class="cart-item-details">Taille: ${item.size} • Prix unitaire: ${item.price} DT</div>
+                            <div class="cart-item-quantity">
+                                <button class="cart-qty-btn" onclick="updateCartQuantity(${index}, -1)">−</button>
+                                <span>${item.quantity}</span>
+                                <button class="cart-qty-btn" onclick="updateCartQuantity(${index}, 1)">+</button>
+                            </div>
+                        </div>
+                        <div class="cart-item-actions">
+                            <div class="cart-item-price">${total} DT</div>
+                            <button class="remove-item" onclick="removeFromCart(${index})">🗑️ Supprimer</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            cartItemsDiv.innerHTML = html;
+            cartSummary.style.display = 'block';
+            updateCartSummary();
+        }
+
+        function updateCartQuantity(index, change) {
+            cart[index].quantity += change;
+            
+            if (cart[index].quantity <= 0) {
+                removeFromCart(index);
+            } else {
+                saveCart();
+                renderCart();
+                updateCartBadge();
+            }
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveCart();
+            renderCart();
+            updateCartBadge();
+        }
+
+        function updateCartSummary() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            document.getElementById('subtotalAmount').textContent = subtotal.toFixed(2) + ' DT';
+            document.getElementById('deliveryAmount').textContent = 'À calculer';
+            document.getElementById('totalAmount').textContent = subtotal.toFixed(2) + ' DT';
+        }
+
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                alert('Votre panier est vide !');
+                return;
+            }
+
+            closeCart();
+            renderCheckoutSummary();
+            document.getElementById('checkoutModal').classList.add('active');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.remove('active');
+        }
+
+        function renderCheckoutSummary() {
+            const summaryDiv = document.getElementById('orderSummaryCheckout');
+            let html = '<h3>Récapitulatif de la commande</h3>';
+            
+            cart.forEach(item => {
+                const total = (item.price * item.quantity).toFixed(2);
+                html += `
+                    <div class="order-item">
+                        <span>${item.product} (${item.size}) × ${item.quantity}</span>
+                        <span>${total} DT</span>
+                    </div>
+                `;
+            });
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            html += `
+                <div class="order-summary-total">
+                    <span>TOTAL:</span>
+                    <span id="checkoutTotal">${subtotal.toFixed(2)} DT</span>
+                </div>
+                <div class="delivery-info" id="deliveryInfo" style="display: none;">
+                    <p id="deliveryMessage"></p>
+                </div>
+            `;
+
+            summaryDiv.innerHTML = html;
         }
 
         function calculateDelivery() {
             const city = document.getElementById('customerCity').value;
-            const subtotal = currentOrderData.subtotal;
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             
             if (!city) {
                 deliveryFee = 0;
-                document.getElementById('summaryDelivery').textContent = 'Calculé selon gouvernorat';
-                document.getElementById('summaryTotal').textContent = subtotal.toFixed(2) + ' DT';
+                document.getElementById('checkoutTotal').textContent = subtotal.toFixed(2) + ' DT';
                 document.getElementById('deliveryInfo').style.display = 'none';
                 return;
             }
@@ -1129,35 +1334,27 @@
             const deliveryInfo = document.getElementById('deliveryInfo');
             const deliveryMessage = document.getElementById('deliveryMessage');
             
-            // Check if city is Sidi Bouzid
             if (city === 'Sidi Bouzid') {
                 deliveryFee = 0;
-                document.getElementById('summaryDelivery').textContent = 'GRATUIT 🎁';
                 deliveryInfo.className = 'delivery-info';
-                deliveryInfo.style.display = 'block';
                 deliveryMessage.innerHTML = '🎉 <strong>Livraison gratuite</strong> pour Sidi Bouzid !';
             } else {
                 deliveryFee = 5;
-                document.getElementById('summaryDelivery').textContent = '5 DT';
                 deliveryInfo.className = 'delivery-info paid';
-                deliveryInfo.style.display = 'block';
                 deliveryMessage.innerHTML = '🚚 Frais de livraison: <strong>5 DT</strong>';
             }
 
+            deliveryInfo.style.display = 'block';
             const total = subtotal + deliveryFee;
-            document.getElementById('summaryTotal').textContent = total.toFixed(2) + ' DT';
-        }
-
-        function closeModal() {
-            document.getElementById('orderModal').classList.remove('active');
+            document.getElementById('checkoutTotal').textContent = total.toFixed(2) + ' DT';
         }
 
         function sendWhatsAppOrder() {
             const orderData = getOrderData();
             if (!orderData) return;
 
-            let whatsappMessage = formatOrderMessage(orderData);
-            const whatsappURL = `https://wa.me/21697244049?text=${encodeURIComponent(whatsappMessage)}`;
+            const message = formatOrderMessage(orderData);
+            const whatsappURL = `https://wa.me/21697244049?text=${encodeURIComponent(message)}`;
             window.open(whatsappURL, '_blank');
             
             showSuccessMessage('WhatsApp');
@@ -1167,84 +1364,24 @@
             const orderData = getOrderData();
             if (!orderData) return;
 
-            currentMessage = formatOrderMessage(orderData);
+            const message = formatOrderMessage(orderData);
             
-            // Copy message to clipboard
-            copyToClipboard(currentMessage);
-            
-            // Show message preview modal
-            document.getElementById('messageText').textContent = currentMessage;
-            document.getElementById('messageModal').classList.add('active');
-            
-            closeModal();
-        }
+            navigator.clipboard.writeText(message).then(() => {
+                alert('Message copié ! Collez-le dans Messenger.');
+                window.open('https://m.me/abdel.gharbi.7', '_blank');
+            }).catch(() => {
+                alert('Veuillez copier ce message:\n\n' + message);
+                window.open('https://m.me/abdel.gharbi.7', '_blank');
+            });
 
-        function copyToClipboard(text) {
-            // Modern way
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).then(() => {
-                    console.log('Message copied to clipboard');
-                }).catch(err => {
-                    console.error('Failed to copy:', err);
-                    fallbackCopy(text);
-                });
-            } else {
-                // Fallback for older browsers
-                fallbackCopy(text);
-            }
-        }
-
-        function fallbackCopy(text) {
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            textarea.style.position = 'fixed';
-            textarea.style.opacity = '0';
-            document.body.appendChild(textarea);
-            textarea.select();
-            try {
-                document.execCommand('copy');
-            } catch (err) {
-                console.error('Fallback copy failed:', err);
-            }
-            document.body.removeChild(textarea);
-        }
-
-        function copyMessageAgain() {
-            copyToClipboard(currentMessage);
-            
-            // Show notification
-            const notification = document.getElementById('copiedNotification');
-            notification.style.display = 'block';
-            notification.textContent = '✅ Message copié à nouveau !';
-            
-            setTimeout(() => {
-                notification.textContent = '✅ Message copié automatiquement !';
-            }, 2000);
-        }
-
-        function openMessenger() {
-            window.open('https://m.me/abdel.gharbi.7', '_blank');
-        }
-
-        function closeMessageModal() {
-            document.getElementById('messageModal').classList.remove('active');
+            showSuccessMessage('Facebook Messenger');
         }
 
         function callPhone() {
             const orderData = getOrderData();
             if (!orderData) return;
 
-            const confirmCall = confirm(
-                `Vous allez appeler Miel de Wahbi au +216 97 244 049\n\n` +
-                `Votre commande :\n` +
-                `• ${orderData.product}\n` +
-                `• ${orderData.size}\n` +
-                `• Quantité: ${orderData.quantity}\n` +
-                `• Total: ${orderData.total} DT\n\n` +
-                `Préparez ces informations pour l'appel !`
-            );
-
-            if (confirmCall) {
+            if (confirm('Vous allez appeler Miel de Wahbi au +216 97 244 049')) {
                 window.location.href = 'tel:+21697244049';
                 showSuccessMessage('Appel téléphonique');
             }
@@ -1262,14 +1399,12 @@
                 return null;
             }
 
-            const subtotal = currentOrderData.subtotal;
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const total = subtotal + deliveryFee;
 
             return {
                 name, phone, city, address, message,
-                product: currentOrderData.product,
-                size: currentOrderData.size,
-                quantity: currentOrderData.quantity,
+                cart: cart,
                 subtotal: subtotal.toFixed(2),
                 deliveryFee: deliveryFee.toFixed(2),
                 total: total.toFixed(2)
@@ -1277,44 +1412,48 @@
         }
 
         function formatOrderMessage(data) {
-            let message = `🍯 NOUVELLE COMMANDE - MIEL DE WAHBI
+            let message = `🍯 NOUVELLE COMMANDE - MIEL DE WAHBI\n\n`;
+            message += `📦 COMMANDE:\n`;
+            
+            data.cart.forEach(item => {
+                message += `• ${item.product} (${item.size}) × ${item.quantity} = ${(item.price * item.quantity).toFixed(2)} DT\n`;
+            });
 
-📦 COMMANDE:
-• Produit: ${data.product}
-• Taille: ${data.size}
-• Quantité: ${data.quantity}
-• Sous-total: ${data.subtotal} DT
-• Livraison: ${data.deliveryFee === '0.00' ? 'GRATUITE 🎁' : data.deliveryFee + ' DT'}
-💰 TOTAL: ${data.total} DT
+            message += `\n• Sous-total: ${data.subtotal} DT\n`;
+            message += `• Livraison: ${data.deliveryFee === '0.00' ? 'GRATUITE 🎁' : data.deliveryFee + ' DT'}\n`;
+            message += `💰 TOTAL: ${data.total} DT\n\n`;
 
-👤 CLIENT:
-• Nom: ${data.name}
-• 📞 Téléphone: ${data.phone}
-• 🏙️ Ville: ${data.city}
-• 📍 Adresse: ${data.address}`;
+            message += `👤 CLIENT:\n`;
+            message += `• Nom: ${data.name}\n`;
+            message += `• 📞 Téléphone: ${data.phone}\n`;
+            message += `• 🏙️ Ville: ${data.city}\n`;
+            message += `• 📍 Adresse: ${data.address}`;
 
             if (data.message) {
-                message += `
-
-💬 Message: ${data.message}`;
+                message += `\n\n💬 Message: ${data.message}`;
             }
 
             return message;
         }
 
         function showSuccessMessage(platform) {
-            closeModal();
+            closeCheckoutModal();
             alert(`Merci ! Votre commande va être envoyée via ${platform}. Nous vous contacterons rapidement ! 🍯`);
+            
+            cart = [];
+            saveCart();
+            updateCartBadge();
         }
 
         window.onclick = function(event) {
-            const modal = document.getElementById('orderModal');
-            const messageModal = document.getElementById('messageModal');
-            if (event.target == modal) {
-                closeModal();
+            const cartModal = document.getElementById('cartModal');
+            const checkoutModal = document.getElementById('checkoutModal');
+            
+            if (event.target == cartModal) {
+                closeCart();
             }
-            if (event.target == messageModal) {
-                closeMessageModal();
+            if (event.target == checkoutModal) {
+                closeCheckoutModal();
             }
         }
     </script>
