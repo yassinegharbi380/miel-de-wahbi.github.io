@@ -1,4 +1,4 @@
-wah/**
+/**
  * PANNEAU D'ADMINISTRATION - MIEL DE WAHBI
  * Gestion facile des produits sans toucher au code
  */
@@ -48,8 +48,8 @@ let settings = {
     facebook: "https://www.facebook.com/abdel.gharbi.7",
     address: "Sidi Bouzid, Tunisie",
     deliveryFee: 5,
-    adminUsername: "abdelwaheb",
-    adminPassword: "97244049"
+    adminUsername: "admin",
+    adminPassword: "admin123"
 };
 
 // ============= INITIALISATION =============
